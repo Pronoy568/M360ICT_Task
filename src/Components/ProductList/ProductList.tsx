@@ -3,15 +3,8 @@ import { Table, Button, Pagination } from "antd";
 import { ColumnsType } from "antd/es/table";
 import { useNavigate } from "react-router-dom";
 import { useGetProductsQuery } from "../../redux/api";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  category: string;
-  description: string;
-  thumbnail: string;
-}
+import { Product } from "src/Type/Types";
+import "./ProductList.css";
 
 const ProductList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -40,6 +33,11 @@ const ProductList: React.FC = () => {
       key: "title",
     },
     {
+      title: "Brand",
+      dataIndex: "brand",
+      key: "brand",
+    },
+    {
       title: "Price",
       dataIndex: "price",
       key: "price",
@@ -50,6 +48,11 @@ const ProductList: React.FC = () => {
       key: "category",
     },
     {
+      title: "Rating",
+      dataIndex: "rating",
+      key: "rating",
+    },
+    {
       title: "Action",
       key: "action",
       render: (_, record) => (
@@ -57,7 +60,7 @@ const ProductList: React.FC = () => {
           type="primary"
           onClick={() => navigate(`/product/${record.id}`)}
         >
-          View Details
+          View
         </Button>
       ),
     },
@@ -65,11 +68,8 @@ const ProductList: React.FC = () => {
       title: "Edit",
       key: "edit",
       render: (_, record) => (
-        <Button
-          type="primary"
-          onClick={() => navigate(`/edit-product/${record.id}`)}
-        >
-          Edit Product
+        <Button onClick={() => navigate(`/edit-product/${record.id}`)}>
+          Edit
         </Button>
       ),
     },
@@ -84,13 +84,14 @@ const ProductList: React.FC = () => {
   }
 
   return (
-    <div>
-      <h2>Total Product: {data?.total}</h2>
+    <div className="responsive-container">
+      <h1 className="responsive-title">Product List</h1>
       <Table
         dataSource={data?.products}
         columns={columns}
         rowKey="id"
         pagination={false}
+        scroll={{ x: 800 }}
         style={{ marginBottom: "20px" }}
       />
       <Pagination
@@ -99,7 +100,7 @@ const ProductList: React.FC = () => {
         total={data?.total}
         showSizeChanger
         onChange={(page) => setCurrentPage(page)}
-        onShowSizeChange={(size) => setPageSize(size)}
+        onShowSizeChange={(current, size) => setPageSize(size)}
       />
     </div>
   );

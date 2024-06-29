@@ -2,12 +2,8 @@ import { Card, Spin, Button } from "antd";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useGetCategoriesQuery } from "../../redux/api";
-
-interface Category {
-  slug: string;
-  name: string;
-  url: string;
-}
+import { Category } from "src/Type/Types";
+import "./CategoryList.css";
 
 const CategoryList: React.FC = () => {
   const { data: categories, error, isLoading } = useGetCategoriesQuery();
@@ -23,19 +19,27 @@ const CategoryList: React.FC = () => {
 
   return (
     <div>
-      <h2>Categories</h2>
-      <ul>
+      <h1
+        style={{
+          textAlign: "center",
+          marginBottom: "20px",
+          fontSize: "38px",
+        }}
+      >
+        Categories
+      </h1>
+      <ul className="categoryList-div">
         {categories?.map((category: Category) => (
-          <div key={category.slug}>
+          <div className="grid-item" key={category.slug}>
             <Card title={category?.name} style={{ width: "100%" }}>
               <p>
                 <strong>Slug:</strong> {category?.slug}
               </p>
               <Button
-                type="primary"
+                type="dashed"
                 onClick={() => navigate(`/category/${category.slug}`)}
               >
-                See All {category?.name} item
+                See {category?.name} Item
               </Button>
             </Card>
           </div>

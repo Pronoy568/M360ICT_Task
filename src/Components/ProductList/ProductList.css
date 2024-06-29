@@ -1,0 +1,19 @@
+.responsive-container {
+  max-width: 1250px;
+  width: 99%;
+  margin: 30px auto;
+  padding: 0 10px;
+}
+
+.responsive-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 38px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .responsive-title {
+    font-size: 24px;
+  }
+}

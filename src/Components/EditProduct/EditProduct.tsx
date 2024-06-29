@@ -7,10 +7,7 @@ import {
   useGetProductByIdQuery,
   useUpdateProductMutation,
 } from "../../redux/api";
-
-interface RouteParams {
-  id: string;
-}
+import { Category, RouteParams } from "src/Type/Types";
 
 const EditProduct: React.FC = () => {
   const { id } = useParams<keyof RouteParams>() as RouteParams;
@@ -49,15 +46,9 @@ const EditProduct: React.FC = () => {
 
     console.log("Updated Product:", formattedValues);
     updateProduct({ id: Number(id), product: formattedValues }).then(() => {
-      navigate(`/product/${id}`);
+      navigate(`/`);
     });
   };
-
-  interface Category {
-    slug: string;
-    name: string;
-    url: string;
-  }
 
   if (productLoading || categoriesLoading) {
     return <Spin />;
@@ -146,8 +137,12 @@ const EditProduct: React.FC = () => {
                 </Button>
               </Space>
             ))}
-            <Form.Item>
-              <Button type="dashed" onClick={() => add()} block>
+            <Form.Item
+              style={{
+                textAlign: "center",
+              }}
+            >
+              <Button type="primary" onClick={() => add()}>
                 Add Review
               </Button>
             </Form.Item>
@@ -155,7 +150,7 @@ const EditProduct: React.FC = () => {
         )}
       </Form.List>
       <Form.Item>
-        <Button type="primary" htmlType="submit" loading={updating}>
+        <Button htmlType="submit" loading={updating} block>
           Submit
         </Button>
       </Form.Item>

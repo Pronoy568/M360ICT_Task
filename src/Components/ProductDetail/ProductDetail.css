@@ -1,0 +1,17 @@
+.responsive-div {
+  background-color: #efefef;
+  padding: 16px;
+  margin-top: 40px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .responsive-div {
+    justify-content: center;
+    flex-direction: column;
+  }
+}

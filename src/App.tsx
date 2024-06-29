@@ -7,6 +7,7 @@ import ProductDetail from "./Components/ProductDetail/ProductDetail";
 import EditProduct from "./Components/EditProduct/EditProduct";
 import CategoryList from "./Components/CategoryList/CategoryList";
 import CategoryProducts from "./Components/CategoryProducts/CategoryProducts";
+import Footer from "./Components/Footer/Footer";
 
 const { Header, Content } = Layout;
 
@@ -32,6 +33,7 @@ const App: React.FC = () => {
           <Route path="/category/:slug" element={<CategoryProducts />} />
         </Routes>
       </Content>
+      <Footer />
     </Layout>
   );
 };

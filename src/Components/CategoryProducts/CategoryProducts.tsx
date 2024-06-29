@@ -2,14 +2,8 @@ import { Card, Spin } from "antd";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useGetProductsByCategoryQuery } from "../../redux/api";
-
-interface Product {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  thumbnail: string;
-}
+import { Product } from "src/Type/Types";
+import "./CategoryProducts.css";
 
 const CategoryProducts: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -25,23 +19,34 @@ const CategoryProducts: React.FC = () => {
 
   return (
     <div>
-      <h2>Products in {slug} category</h2>
-      <ul>
+      <h1
+        style={{
+          textAlign: "center",
+          fontSize: "38px",
+        }}
+      >
+        Products in {slug} category
+      </h1>
+      <ul className="categoryProduct">
         {data?.products.map((product: Product) => (
           <Card
             key={product.id}
             title={product.title}
-            style={{ width: "100%" }}
+            style={{ width: "100%", textAlign: "center" }}
+            className="product-item"
           >
-            <p>{product.description}</p>
-            <p>
-              <strong>Price:</strong> ${product.price}
-            </p>
             <img
               src={product.thumbnail}
               alt={product.title}
               style={{ width: "100px" }}
             />
+            <p style={{ textAlign: "justify" }}>{product.description}</p>
+            <p>
+              <strong>Price:</strong> ${product.price}
+            </p>
+            <p>
+              <strong>Rating:</strong> {product.rating}
+            </p>
           </Card>
         ))}
       </ul>
